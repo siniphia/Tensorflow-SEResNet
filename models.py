@@ -88,53 +88,53 @@ class SeResNetDouble4_448:
     def __init__(self, name, images, channel, classes):
         with tf.variable_scope(name):
             # 1 - Filters
-            self.conv_w = tf.get_variable(name='conv_w', shape=[3, 3, channel, 64], initializer=he())
+            self.conv_w = tf.get_variable(name='cls_conv_w', shape=[3, 3, channel, 64], initializer=he())
 
-            self.res_w1_1 = tf.get_variable(name='res_w1_1', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_2 = tf.get_variable(name='res_w1_2', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_3 = tf.get_variable(name='res_w1_3', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_4 = tf.get_variable(name='res_w1_4', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_1 = tf.get_variable(name='cls_res_w1_1', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_2 = tf.get_variable(name='cls_res_w1_2', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_3 = tf.get_variable(name='cls_res_w1_3', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_4 = tf.get_variable(name='cls_res_w1_4', shape=[3, 3, 64, 64], initializer=he())
 
-            self.proj_w2 = tf.get_variable(name='proj_w2', shape=[1, 1, 64, 128], initializer=he())
-            self.res_w2_1 = tf.get_variable(name='res_w2_1', shape=[3, 3, 64, 128], initializer=he())
-            self.res_w2_2 = tf.get_variable(name='res_w2_2', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_3 = tf.get_variable(name='res_w2_3', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_4 = tf.get_variable(name='res_w2_4', shape=[3, 3, 128, 128], initializer=he())
+            self.proj_w2 = tf.get_variable(name='cls_proj_w2', shape=[1, 1, 64, 128], initializer=he())
+            self.res_w2_1 = tf.get_variable(name='cls_res_w2_1', shape=[3, 3, 64, 128], initializer=he())
+            self.res_w2_2 = tf.get_variable(name='cls_res_w2_2', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_3 = tf.get_variable(name='cls_res_w2_3', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_4 = tf.get_variable(name='cls_res_w2_4', shape=[3, 3, 128, 128], initializer=he())
 
-            self.proj_w3 = tf.get_variable(name='proj_w3', shape=[1, 1, 128, 256], initializer=he())
-            self.res_w3_1 = tf.get_variable(name='res_w3_1', shape=[3, 3, 128, 256], initializer=he())
-            self.res_w3_2 = tf.get_variable(name='res_w3_2', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_3 = tf.get_variable(name='res_w3_3', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_4 = tf.get_variable(name='res_w3_4', shape=[3, 3, 256, 256], initializer=he())
+            self.proj_w3 = tf.get_variable(name='cls_proj_w3', shape=[1, 1, 128, 256], initializer=he())
+            self.res_w3_1 = tf.get_variable(name='cls_res_w3_1', shape=[3, 3, 128, 256], initializer=he())
+            self.res_w3_2 = tf.get_variable(name='cls_res_w3_2', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_3 = tf.get_variable(name='cls_res_w3_3', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_4 = tf.get_variable(name='cls_res_w3_4', shape=[3, 3, 256, 256], initializer=he())
 
-            self.proj_w4 = tf.get_variable(name='proj_w4', shape=[1, 1, 256, 320], initializer=he())
-            self.res_w4_1 = tf.get_variable(name='res_w4_1', shape=[3, 3, 256, 320], initializer=he())
-            self.res_w4_2 = tf.get_variable(name='res_w4_2', shape=[3, 3, 320, 320], initializer=he())
-            self.res_w4_3 = tf.get_variable(name='res_w4_3', shape=[3, 3, 320, 320], initializer=he())
-            self.res_w4_4 = tf.get_variable(name='res_w4_4', shape=[3, 3, 320, 320], initializer=he())
+            self.proj_w4 = tf.get_variable(name='cls_proj_w4', shape=[1, 1, 256, 320], initializer=he())
+            self.res_w4_1 = tf.get_variable(name='cls_res_w4_1', shape=[3, 3, 256, 320], initializer=he())
+            self.res_w4_2 = tf.get_variable(name='cls_res_w4_2', shape=[3, 3, 320, 320], initializer=he())
+            self.res_w4_3 = tf.get_variable(name='cls_res_w4_3', shape=[3, 3, 320, 320], initializer=he())
+            self.res_w4_4 = tf.get_variable(name='cls_res_w4_4', shape=[3, 3, 320, 320], initializer=he())
 
-            self.conv_last_w1 = tf.get_variable(name='conv_last_w1', shape=[3, 3, 320, 512], initializer=he())
+            self.conv_last_w1 = tf.get_variable(name='cls_conv_last_w1', shape=[3, 3, 320, 512], initializer=he())
             self.fc_w1 = tf.get_variable(name='fc_w1', shape=[2048, classes])
 
             # 2 - Graphs
             self.conv = tf.nn.relu(tf.nn.conv2d(images, self.conv_w, strides=(1, 1, 1, 1), padding='SAME'))
-            self.pool = tf.nn.max_pool(self.conv, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,64,64,64)
+            self.pool = tf.nn.max_pool(self.conv, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,224,224,64)
 
-            self.res1_1 = _seresblock_double('res1_1', self.pool, self.res_w1_1, self.res_w1_2, 64)
-            self.res1_2 = _seresblock_double('res1_2', self.res1_1, self.res_w1_3, self.res_w1_4, 64)
-            self.pool1 = tf.nn.max_pool(self.res1_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,32,32,64)
+            self.res1_1 = _seresblock_double('cls_res1_1', self.pool, self.res_w1_1, self.res_w1_2, 64)
+            self.res1_2 = _seresblock_double('cls_res1_2', self.res1_1, self.res_w1_3, self.res_w1_4, 64)
+            self.pool1 = tf.nn.max_pool(self.res1_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,112,112,64)
 
-            self.res2_1 = _seresblock_proj('res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2, 128)
-            self.res2_2 = _seresblock_double('res2_2', self.res2_1, self.res_w2_3, self.res_w2_4, 128)
-            self.pool2 = tf.nn.max_pool(self.res2_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,16,16,128)
+            self.res2_1 = _seresblock_proj('cls_res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2, 128)
+            self.res2_2 = _seresblock_double('cls_res2_2', self.res2_1, self.res_w2_3, self.res_w2_4, 128)
+            self.pool2 = tf.nn.max_pool(self.res2_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,56,56,128)
 
-            self.res3_1 = _seresblock_proj('res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3, 256)
-            self.res3_2 = _seresblock_double('res3_2', self.res3_1, self.res_w3_3, self.res_w3_4, 256)
-            self.pool3 = tf.nn.max_pool(self.res3_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,8,8,256)
+            self.res3_1 = _seresblock_proj('cls_res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3, 256)
+            self.res3_2 = _seresblock_double('cls_res3_2', self.res3_1, self.res_w3_3, self.res_w3_4, 256)
+            self.pool3 = tf.nn.max_pool(self.res3_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,28,28,256)
 
-            self.res4_1 = _seresblock_proj('res4_1', self.pool3, self.res_w4_1, self.res_w4_2, self.proj_w4, 320)
-            self.res4_2 = _seresblock_double('res4_2', self.res4_1, self.res_w4_3, self.res_w4_4, 320)
-            self.pool4 = tf.nn.max_pool(self.res4_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,8,8,256)
+            self.res4_1 = _seresblock_proj('cls_res4_1', self.pool3, self.res_w4_1, self.res_w4_2, self.proj_w4, 320)
+            self.res4_2 = _seresblock_double('cls_res4_2', self.res4_1, self.res_w4_3, self.res_w4_4, 320)
+            self.pool4 = tf.nn.max_pool(self.res4_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,14,14,320)
 
             self.conv_last = tf.nn.relu(tf.nn.conv2d(self.pool4, self.conv_last_w1, strides=(1, 1, 1, 1), padding='SAME'))
             self.pool_last = tf.nn.avg_pool(self.conv_last, ksize=(1, 7, 7, 1), strides=(1, 7, 7, 1), padding='SAME')
@@ -142,35 +142,45 @@ class SeResNetDouble4_448:
             self.flat = tf.reshape(self.pool_last, shape=[-1, 2048])
             self.logits = tf.matmul(self.flat, self.fc_w1)
 
+    def get_cam(self, width, height):
+        with tf.variable_scope('cam'):
+            conv_resized = tf.image.resize_bilinear(self.conv_last, size=(height, width))  # 128x128x512
+            conv_flat = tf.reshape(conv_resized, shape=[-1, height * width, 512])
+            gap = tf.nn.avg_pool(self.conv_last, ksize=(1, 14, 14, 1), strides=(1, 14, 14, 1), padding='SAME')
+            gap_flat = tf.reshape(gap, shape=[-1, 512, 1])
+            cam = tf.reshape(tf.matmul(conv_flat, gap_flat), shape=[-1, height, width, 1])
+
+        return cam
+
 
 class ResNetDouble4_448:
     def __init__(self, name, images, channel, classes):
         with tf.variable_scope(name):
             # 1 - Filters
-            self.conv_w = tf.get_variable(name='conv_w', shape=[3, 3, channel, 64], initializer=he())
+            self.conv_w = tf.get_variable(name='cls_conv_w', shape=[3, 3, channel, 64], initializer=he())
 
-            self.res_w1_1 = tf.get_variable(name='res_w1_1', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_2 = tf.get_variable(name='res_w1_2', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_3 = tf.get_variable(name='res_w1_3', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_4 = tf.get_variable(name='res_w1_4', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_1 = tf.get_variable(name='cls_res_w1_1', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_2 = tf.get_variable(name='cls_res_w1_2', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_3 = tf.get_variable(name='cls_res_w1_3', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_4 = tf.get_variable(name='cls_res_w1_4', shape=[3, 3, 64, 64], initializer=he())
 
-            self.proj_w2 = tf.get_variable(name='proj_w2', shape=[1, 1, 64, 128], initializer=he())
-            self.res_w2_1 = tf.get_variable(name='res_w2_1', shape=[3, 3, 64, 128], initializer=he())
-            self.res_w2_2 = tf.get_variable(name='res_w2_2', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_3 = tf.get_variable(name='res_w2_3', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_4 = tf.get_variable(name='res_w2_4', shape=[3, 3, 128, 128], initializer=he())
+            self.proj_w2 = tf.get_variable(name='cls_proj_w2', shape=[1, 1, 64, 128], initializer=he())
+            self.res_w2_1 = tf.get_variable(name='cls_res_w2_1', shape=[3, 3, 64, 128], initializer=he())
+            self.res_w2_2 = tf.get_variable(name='cls_res_w2_2', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_3 = tf.get_variable(name='cls_res_w2_3', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_4 = tf.get_variable(name='cls_res_w2_4', shape=[3, 3, 128, 128], initializer=he())
 
-            self.proj_w3 = tf.get_variable(name='proj_w3', shape=[1, 1, 128, 256], initializer=he())
-            self.res_w3_1 = tf.get_variable(name='res_w3_1', shape=[3, 3, 128, 256], initializer=he())
-            self.res_w3_2 = tf.get_variable(name='res_w3_2', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_3 = tf.get_variable(name='res_w3_3', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_4 = tf.get_variable(name='res_w3_4', shape=[3, 3, 256, 256], initializer=he())
+            self.proj_w3 = tf.get_variable(name='cls_proj_w3', shape=[1, 1, 128, 256], initializer=he())
+            self.res_w3_1 = tf.get_variable(name='cls_res_w3_1', shape=[3, 3, 128, 256], initializer=he())
+            self.res_w3_2 = tf.get_variable(name='cls_res_w3_2', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_3 = tf.get_variable(name='cls_res_w3_3', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_4 = tf.get_variable(name='cls_res_w3_4', shape=[3, 3, 256, 256], initializer=he())
 
-            self.proj_w4 = tf.get_variable(name='proj_w4', shape=[1, 1, 256, 320], initializer=he())
-            self.res_w4_1 = tf.get_variable(name='res_w4_1', shape=[3, 3, 256, 320], initializer=he())
-            self.res_w4_2 = tf.get_variable(name='res_w4_2', shape=[3, 3, 320, 320], initializer=he())
-            self.res_w4_3 = tf.get_variable(name='res_w4_3', shape=[3, 3, 320, 320], initializer=he())
-            self.res_w4_4 = tf.get_variable(name='res_w4_4', shape=[3, 3, 320, 320], initializer=he())
+            self.proj_w4 = tf.get_variable(name='cls_proj_w4', shape=[1, 1, 256, 320], initializer=he())
+            self.res_w4_1 = tf.get_variable(name='cls_res_w4_1', shape=[3, 3, 256, 320], initializer=he())
+            self.res_w4_2 = tf.get_variable(name='cls_res_w4_2', shape=[3, 3, 320, 320], initializer=he())
+            self.res_w4_3 = tf.get_variable(name='cls_res_w4_3', shape=[3, 3, 320, 320], initializer=he())
+            self.res_w4_4 = tf.get_variable(name='cls_res_w4_4', shape=[3, 3, 320, 320], initializer=he())
 
             self.conv_last_w1 = tf.get_variable(name='conv_last_w1', shape=[3, 3, 320, 512], initializer=he())
             self.fc_w1 = tf.get_variable(name='fc_w1', shape=[2048, classes])
@@ -179,20 +189,20 @@ class ResNetDouble4_448:
             self.conv = tf.nn.relu(tf.nn.conv2d(images, self.conv_w, strides=(1, 1, 1, 1), padding='SAME'))
             self.pool = tf.nn.max_pool(self.conv, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,64,64,64)
 
-            self.res1_1 = _resblock_double('res1_1', self.pool, self.res_w1_1, self.res_w1_2)
-            self.res1_2 = _resblock_double('res1_2', self.res1_1, self.res_w1_3, self.res_w1_4)
+            self.res1_1 = _resblock_double('cls_res1_1', self.pool, self.res_w1_1, self.res_w1_2)
+            self.res1_2 = _resblock_double('cls_res1_2', self.res1_1, self.res_w1_3, self.res_w1_4)
             self.pool1 = tf.nn.max_pool(self.res1_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,32,32,64)
 
-            self.res2_1 = _resblock_proj('res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2)
-            self.res2_2 = _resblock_double('res2_2', self.res2_1, self.res_w2_3, self.res_w2_4)
+            self.res2_1 = _resblock_proj('cls_res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2)
+            self.res2_2 = _resblock_double('cls_res2_2', self.res2_1, self.res_w2_3, self.res_w2_4)
             self.pool2 = tf.nn.max_pool(self.res2_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,16,16,128)
 
-            self.res3_1 = _resblock_proj('res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3)
-            self.res3_2 = _resblock_double('res3_2', self.res3_1, self.res_w3_3, self.res_w3_4)
+            self.res3_1 = _resblock_proj('cls_res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3)
+            self.res3_2 = _resblock_double('cls_res3_2', self.res3_1, self.res_w3_3, self.res_w3_4)
             self.pool3 = tf.nn.max_pool(self.res3_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,8,8,256)
 
-            self.res4_1 = _resblock_proj('res4_1', self.pool3, self.res_w4_1, self.res_w4_2, self.proj_w4)
-            self.res4_2 = _resblock_double('res4_2', self.res4_1, self.res_w4_3, self.res_w4_4)
+            self.res4_1 = _resblock_proj('cls_res4_1', self.pool3, self.res_w4_1, self.res_w4_2, self.proj_w4)
+            self.res4_2 = _resblock_double('cls_res4_2', self.res4_1, self.res_w4_3, self.res_w4_4)
             self.pool4 = tf.nn.max_pool(self.res4_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,8,8,256)
 
             self.conv_last = tf.nn.relu(tf.nn.conv2d(self.pool4, self.conv_last_w1, strides=(1, 1, 1, 1), padding='SAME'))
@@ -206,26 +216,26 @@ class SeResNetDouble3_128:
     def __init__(self, name, images, channel, classes):
         with tf.variable_scope(name):
             # 1 - Filters
-            self.conv_w = tf.get_variable(name='conv_w', shape=[3, 3, channel, 64], initializer=he())
+            self.conv_w = tf.get_variable(name='cls_conv_w', shape=[3, 3, channel, 64], initializer=he())
 
-            self.res_w1_1 = tf.get_variable(name='res_w1_1', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_2 = tf.get_variable(name='res_w1_2', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_3 = tf.get_variable(name='res_w1_3', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_4 = tf.get_variable(name='res_w1_4', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_1 = tf.get_variable(name='cls_res_w1_1', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_2 = tf.get_variable(name='cls_res_w1_2', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_3 = tf.get_variable(name='cls_res_w1_3', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_4 = tf.get_variable(name='cls_res_w1_4', shape=[3, 3, 64, 64], initializer=he())
 
-            self.proj_w2 = tf.get_variable(name='proj_w2', shape=[1, 1, 64, 128], initializer=he())
-            self.res_w2_1 = tf.get_variable(name='res_w2_1', shape=[3, 3, 64, 128], initializer=he())
-            self.res_w2_2 = tf.get_variable(name='res_w2_2', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_3 = tf.get_variable(name='res_w2_3', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_4 = tf.get_variable(name='res_w2_4', shape=[3, 3, 128, 128], initializer=he())
+            self.proj_w2 = tf.get_variable(name='cls_proj_w2', shape=[1, 1, 64, 128], initializer=he())
+            self.res_w2_1 = tf.get_variable(name='cls_res_w2_1', shape=[3, 3, 64, 128], initializer=he())
+            self.res_w2_2 = tf.get_variable(name='cls_res_w2_2', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_3 = tf.get_variable(name='cls_res_w2_3', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_4 = tf.get_variable(name='cls_res_w2_4', shape=[3, 3, 128, 128], initializer=he())
 
-            self.proj_w3 = tf.get_variable(name='proj_w3', shape=[1, 1, 128, 256], initializer=he())
-            self.res_w3_1 = tf.get_variable(name='res_w3_1', shape=[3, 3, 128, 256], initializer=he())
-            self.res_w3_2 = tf.get_variable(name='res_w3_2', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_3 = tf.get_variable(name='res_w3_3', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_4 = tf.get_variable(name='res_w3_4', shape=[3, 3, 256, 256], initializer=he())
+            self.proj_w3 = tf.get_variable(name='cls_proj_w3', shape=[1, 1, 128, 256], initializer=he())
+            self.res_w3_1 = tf.get_variable(name='cls_res_w3_1', shape=[3, 3, 128, 256], initializer=he())
+            self.res_w3_2 = tf.get_variable(name='cls_res_w3_2', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_3 = tf.get_variable(name='cls_res_w3_3', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_4 = tf.get_variable(name='cls_res_w3_4', shape=[3, 3, 256, 256], initializer=he())
 
-            self.conv_last_w1 = tf.get_variable(name='conv_last_w1', shape=[3, 3, 256, 512], initializer=he())
+            self.conv_last_w1 = tf.get_variable(name='cls_conv_last_w1', shape=[3, 3, 256, 512], initializer=he())
             self.fc_w1 = tf.get_variable(name='fc_w1', shape=[2048, classes])  # bounding box coords
             # self.concat_w = tf.get_variable(name='concat_w', shape=[3072, classes])
 
@@ -233,16 +243,16 @@ class SeResNetDouble3_128:
             self.conv = tf.nn.relu(tf.nn.conv2d(images, self.conv_w, strides=(1, 1, 1, 1), padding='SAME'))
             self.pool = tf.nn.max_pool(self.conv, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,64,64,64)
 
-            self.res1_1 = _seresblock_double('res1_1', self.pool, self.res_w1_1, self.res_w1_2, 64)
-            self.res1_2 = _seresblock_double('res1_2', self.res1_1, self.res_w1_3, self.res_w1_4, 64)
+            self.res1_1 = _seresblock_double('cls_res1_1', self.pool, self.res_w1_1, self.res_w1_2, 64)
+            self.res1_2 = _seresblock_double('cls_res1_2', self.res1_1, self.res_w1_3, self.res_w1_4, 64)
             self.pool1 = tf.nn.max_pool(self.res1_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,32,32,64)
 
-            self.res2_1 = _seresblock_proj('res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2, 128)
-            self.res2_2 = _seresblock_double('res2_2', self.res2_1, self.res_w2_3, self.res_w2_4, 128)
+            self.res2_1 = _seresblock_proj('cls_res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2, 128)
+            self.res2_2 = _seresblock_double('cls_res2_2', self.res2_1, self.res_w2_3, self.res_w2_4, 128)
             self.pool2 = tf.nn.max_pool(self.res2_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,16,16,128)
 
-            self.res3_1 = _seresblock_proj('res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3, 256)
-            self.res3_2 = _seresblock_double('res3_2', self.res3_1, self.res_w3_3, self.res_w3_4, 256)
+            self.res3_1 = _seresblock_proj('cls_res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3, 256)
+            self.res3_2 = _seresblock_double('cls_res3_2', self.res3_1, self.res_w3_3, self.res_w3_4, 256)
             self.pool3 = tf.nn.max_pool(self.res3_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,8,8,256)
 
             self.conv_last = tf.nn.relu(tf.nn.conv2d(self.pool3, self.conv_last_w1, strides=(1, 1, 1, 1), padding='SAME'))
@@ -261,24 +271,24 @@ class ResNetDouble3_128:
     def __init__(self, name, images, channel, classes):
         with tf.variable_scope(name):
             # 1 - Filters
-            self.conv_w = tf.get_variable(name='conv_w', shape=[3, 3, channel, 64], initializer=he())
+            self.conv_w = tf.get_variable(name='cls_conv_w', shape=[3, 3, channel, 64], initializer=he())
 
-            self.res_w1_1 = tf.get_variable(name='res_w1_1', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_2 = tf.get_variable(name='res_w1_2', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_3 = tf.get_variable(name='res_w1_3', shape=[3, 3, 64, 64], initializer=he())
-            self.res_w1_4 = tf.get_variable(name='res_w1_4', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_1 = tf.get_variable(name='cls_res_w1_1', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_2 = tf.get_variable(name='cls_res_w1_2', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_3 = tf.get_variable(name='cls_res_w1_3', shape=[3, 3, 64, 64], initializer=he())
+            self.res_w1_4 = tf.get_variable(name='cls_res_w1_4', shape=[3, 3, 64, 64], initializer=he())
 
-            self.proj_w2 = tf.get_variable(name='proj_w2', shape=[1, 1, 64, 128], initializer=he())
-            self.res_w2_1 = tf.get_variable(name='res_w2_1', shape=[3, 3, 64, 128], initializer=he())
-            self.res_w2_2 = tf.get_variable(name='res_w2_2', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_3 = tf.get_variable(name='res_w2_3', shape=[3, 3, 128, 128], initializer=he())
-            self.res_w2_4 = tf.get_variable(name='res_w2_4', shape=[3, 3, 128, 128], initializer=he())
+            self.proj_w2 = tf.get_variable(name='cls_proj_w2', shape=[1, 1, 64, 128], initializer=he())
+            self.res_w2_1 = tf.get_variable(name='cls_res_w2_1', shape=[3, 3, 64, 128], initializer=he())
+            self.res_w2_2 = tf.get_variable(name='cls_res_w2_2', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_3 = tf.get_variable(name='cls_res_w2_3', shape=[3, 3, 128, 128], initializer=he())
+            self.res_w2_4 = tf.get_variable(name='cls_res_w2_4', shape=[3, 3, 128, 128], initializer=he())
 
-            self.proj_w3 = tf.get_variable(name='proj_w3', shape=[1, 1, 128, 256], initializer=he())
-            self.res_w3_1 = tf.get_variable(name='res_w3_1', shape=[3, 3, 128, 256], initializer=he())
-            self.res_w3_2 = tf.get_variable(name='res_w3_2', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_3 = tf.get_variable(name='res_w3_3', shape=[3, 3, 256, 256], initializer=he())
-            self.res_w3_4 = tf.get_variable(name='res_w3_4', shape=[3, 3, 256, 256], initializer=he())
+            self.proj_w3 = tf.get_variable(name='cls_proj_w3', shape=[1, 1, 128, 256], initializer=he())
+            self.res_w3_1 = tf.get_variable(name='cls_res_w3_1', shape=[3, 3, 128, 256], initializer=he())
+            self.res_w3_2 = tf.get_variable(name='cls_res_w3_2', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_3 = tf.get_variable(name='cls_res_w3_3', shape=[3, 3, 256, 256], initializer=he())
+            self.res_w3_4 = tf.get_variable(name='cls_res_w3_4', shape=[3, 3, 256, 256], initializer=he())
 
             self.conv_last_w1 = tf.get_variable(name='conv_last_w1', shape=[3, 3, 256, 512], initializer=he())
             self.fc_w1 = tf.get_variable(name='fc_w1', shape=[2048, classes])  # bounding box coords
@@ -288,16 +298,16 @@ class ResNetDouble3_128:
             self.conv = tf.nn.relu(tf.nn.conv2d(images, self.conv_w, strides=(1, 1, 1, 1), padding='SAME'))
             self.pool = tf.nn.max_pool(self.conv, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,64,64,64)
 
-            self.res1_1 = _resblock_double('res1_1', self.pool, self.res_w1_1, self.res_w1_2)
-            self.res1_2 = _resblock_double('res1_2', self.res1_1, self.res_w1_3, self.res_w1_4)
+            self.res1_1 = _resblock_double('cls_res1_1', self.pool, self.res_w1_1, self.res_w1_2)
+            self.res1_2 = _resblock_double('cls_res1_2', self.res1_1, self.res_w1_3, self.res_w1_4)
             self.pool1 = tf.nn.max_pool(self.res1_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,32,32,64)
 
-            self.res2_1 = _resblock_proj('res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2)
-            self.res2_2 = _resblock_double('res2_2', self.res2_1, self.res_w2_3, self.res_w2_4)
+            self.res2_1 = _resblock_proj('cls_res2_1', self.pool1, self.res_w2_1, self.res_w2_2, self.proj_w2)
+            self.res2_2 = _resblock_double('cls_res2_2', self.res2_1, self.res_w2_3, self.res_w2_4)
             self.pool2 = tf.nn.max_pool(self.res2_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,16,16,128)
 
-            self.res3_1 = _resblock_proj('res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3)
-            self.res3_2 = _resblock_double('res3_2', self.res3_1, self.res_w3_3, self.res_w3_4)
+            self.res3_1 = _resblock_proj('cls_res3_1', self.pool2, self.res_w3_1, self.res_w3_2, self.proj_w3)
+            self.res3_2 = _resblock_double('cls_res3_2', self.res3_1, self.res_w3_3, self.res_w3_4)
             self.pool3 = tf.nn.max_pool(self.res3_2, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')  # (?,8,8,256)
 
             self.conv_last = tf.nn.relu(tf.nn.conv2d(self.pool3, self.conv_last_w1, strides=(1, 1, 1, 1), padding='SAME'))
@@ -339,6 +349,7 @@ class PatchProcessor:
             self.rt_maxil_boxes = self._center_to_yxyx(1, ori_w, ori_h)
             self.rt_maxil_ind = tf.to_int32(tf.linspace(0., batch_size - 1, batch_size))  # tensor with 0 ~ 31
             self.rt_maxil = tf.image.crop_and_resize(images, self.rt_maxil_boxes, self.rt_maxil_ind, (new_h, new_w))
+            self.rt_maxil = tf.image.flip_left_right(self.rt_maxil)
             self.cropped_imgs = tf.concat([self.lt_maxil, self.rt_maxil], axis=0)  # stacked cropped images (2?,56,56,1)
 
     def _center_to_yxyx(self, classes, ori_w, ori_h):
@@ -354,7 +365,7 @@ class PatchProcessor:
 
             return coords
 
-    def random_distortion(self, batch_size, do_translate=False, do_rotate=False, do_contrast=False, do_flip=True,
+    def random_distortion(self, batch_size, do_translate=False, do_rotate=False, do_contrast=False, do_flip=False,
                           trsl_pixel=15, rot_angle=5, cont_ratio=0.5):
         if do_translate:
             rand_translation = tf.random_uniform([batch_size, 2], -1 * trsl_pixel, trsl_pixel, dtype=tf.float32)
