@@ -1,8 +1,22 @@
-# Tensorflow-SEResNet
+# Tensorflow-SinusitisDetCls
++ Project for Maxillary Sinusitis Detection & Classification
 
-## Implemented for Sinusitis Diagnosis Project
-+ ResNetDouble3_128
-+ ResNetDouble4_448
-+ SeResNetDouble3_128
-+ SeResNetDouble4_448
-+ PatchProcessor
+## models.py
++ ResNetDouble3_128 (classifier)
++ ResNetDouble4_448 (detector)
++ SeResNetDouble3_128 (classifier)
++ SeResNetDouble4_448 (detector)
++ PatchProcessor (bridge btw det & cls)
+
+## datasets.py
+ + prepare information for image & label dataset
+ + read and augment DICOM images
+ + return dataset object
+ 
+## metrics.py
+ + prob, pred, acc, iou
+ + loss functions
+ + sens, spec, auc, roc curve
+ 
+## visualizer.py
+ + plot bounding box and labels
